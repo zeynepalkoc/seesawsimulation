@@ -6,7 +6,7 @@ body{
     margin: 0;
     padding: 20px 10px;
     font-family: 'arial', sans-serif;
-    background: #e5e5e5e9;
+    background: #efefefdf;
     display: flex;
     justify-content: center;
 }
@@ -46,3 +46,10 @@ body{
     color: #333;
 }
 
+.simulation-area{
+   position: relative;
+    height: 400px;
+    background: #ededed;
+    border-radius: 5px;
+    color: #777;
+}
