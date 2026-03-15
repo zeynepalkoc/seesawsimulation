@@ -79,8 +79,10 @@ body{
     border-left: 30px solid transparent;
     border-right: 30px solid transparent;
     border-bottom: 60px solid #7700ff;
+
     
 }
+
 
 .plank {
   position: absolute;
@@ -248,4 +250,47 @@ body{
     width:100%;
     height: 52px;
     background:#a8b5b8;
+}
+
+@media (max-width:900px){
+    .container{
+        padding:20px;
+    }
+
+    .stat-panel{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .simulate-area{
+        height: 420px;
+    }
+
+    #plank{
+        width: 320px;
+    }
+
+    #reset{
+        width: 100%;
+    }
+
+    @media (max-width: 500px){
+
+  .stat-panel{
+    grid-template-columns:1fr;
+  }
+
+  #plank{
+    width:260px;
+  }
+
+  .simulate-area{
+    height:380px;
+  }
+
+  .log-area{
+    max-height:120px;
+  }
+
+}
 }
