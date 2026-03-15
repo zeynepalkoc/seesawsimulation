@@ -25,27 +25,33 @@ function generateRandomWeight(){
 
  let currentWeight= generateRandomWeight();
  updatenextWeightDisplay();
-
-
 plank.addEventListener("click", handlePlankClick);
 resetButton.addEventListener("click", resetSimulation);
-plank.addEventListener("mouseenter", function(){
-    previewBall.style.display="flex";
 
+plank.addEventListener("mouseenter", function(){
+    updatePreviewBall(plank.offerWidth / 2);
+    previewBall.style.opacity = "0.25";
 });
 
 plank.addEventListener("mouseleave", function(){
-    previewBall.style.display="none";
-
+    previewBall.style.opacity = "0";
 });
 
 plank.addEventListener("mousemove", function(event){
-    const rect= plank.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
+    const rect = plank.getBoundingClientRect();
+    let mouseX = event.clientX - rect.left;
+
+    if(mouseX < 0){
+        mouseX = 0;
+    }
+
+    if(mouseX > rect.width){
+        mouseX = rect.width;
+    }
 
     updatePreviewBall(mouseX);
 });
-
+console.log("click çalıştı");
 function handlePlankClick(event){
    const rect=plank.getBoundingClientRect();
    const clickX = event.clientX - rect.left;
@@ -146,10 +152,18 @@ function calculateTourqueDifference(){
   {
     objects=[];
 objectsContainer.innerHTML="";
-plank.style.transform=`translateX(-%50) rotate(0deg)`;
+const logArea=document.getElementById("log-area");
+if(logArea){
+    logArea.innerHTML = "";
+}
+plank.style.transform = `translateX(-50%) rotate(${0}deg)`;
 leftWeight.textContent=`0 kg`;
 rightWeight.textContent=`0 kg`;
 tiltAngle.textContent=`0.0°`;
 currentWeight=generateRandomWeight();
 updateWeightDisplay();
+
+updatePreviewBall(plank.offsetHeight / 2);
+previewBall.style.opacity = "0";
+
   }
