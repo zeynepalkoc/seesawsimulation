@@ -6,18 +6,18 @@ const rightWeight=document.getElementById("rightweight");
 const nextWeight=document.getElementById("nextweight");
 const tiltAngle=document.getElementById("tiltangle");
 const resetButton=document.getElementById("reset");
-const simulationArea = document.getElementById("simulate-area");
 const objectsContainer=document.getElementById("objects-container");
 const previewBall=document.getElementById("preview-ball");
+const previewText = document.getElementById("preview-text");
 
 function updatePreviewBall(positionX){
    const size =20 + currentWeight * 5;
    
-    previewBall.textContent = `${currentWeight} kg`;
+    previewText.textContent = `${currentWeight} kg`;
     previewBall.style.width = `${size}px`;
     previewBall.style.height = `${size}px`;
     previewBall.style.left = `${positionX - size / 2}px`;
-    previewBall.style.top = `185px`;
+previewBall.style.top = `-${size * 1.30}px`;
 }
 
 function generateRandomWeight(){
@@ -30,7 +30,7 @@ plank.addEventListener("click", handlePlankClick);
 resetButton.addEventListener("click", resetSimulation);
 
 plank.addEventListener("mouseenter", function(){
-    updatePreviewBall(plank.offerWidth / 2);
+    updatePreviewBall(plank.offsetWidth / 2);
     previewBall.style.opacity = "0.25";
 });
 
@@ -54,22 +54,22 @@ plank.addEventListener("mousemove", function(event){
 });
 console.log("click çalıştı");
 function handlePlankClick(event){
-   const rect=simulationArea.getBoundingClientRect();
-   const clickX = event.clientX - rect.left;
-  
-   const ball=document.createElement("div");
-   ball.className="object";
-   ball.textContent = `${currentWeight} kg`;
+   const rect = plank.getBoundingClientRect();
+const clickX = event.clientX - rect.left;
 
-   const size=20 + currentWeight*5;
-   ball.style.width = `${size}px`;
-   ball.style.height = `${size}px`;
+const ball = document.createElement("div");
+ball.className = "object";
+ball.textContent = `${currentWeight} kg`;
 
-   ball.style.left = `${clickX - size/2}px`;
-    ball.style.top = `-50px`;
+const size = 20 + currentWeight * 5;
+ball.style.width = `${size}px`;
+ball.style.height = `${size}px`;
 
-  const center = rect.width / 2;
-  const distance = clickX - center;
+const center = rect.width / 2;
+const distance = clickX - center;
+
+ball.style.left = `${center + distance - size/2}px`;
+ball.style.top = `-${size * 0.25}px`;
 
   objects.push({ weight: currentWeight, distance: distance });
    
@@ -157,14 +157,14 @@ const logArea=document.getElementById("log-area");
 if(logArea){
     logArea.innerHTML = "";
 }
-plank.style.transform = `translateX(-50%) rotate(${0}deg)`;
+plank.style.transform = `translate(-50%, -50%) rotate(0deg)`;
 leftWeight.textContent=`0 kg`;
 rightWeight.textContent=`0 kg`;
 tiltAngle.textContent=`0.0°`;
 currentWeight=generateRandomWeight();
 updateWeightDisplay();
 
-updatePreviewBall(plank.offsetHeight / 2);
+
 previewBall.style.opacity = "0";
 
   }

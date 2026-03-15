@@ -116,7 +116,7 @@ body{
 .preview-ball
 {
    
-    opacity: 0,05;
+    opacity: 0.ss05;
     pointer-events:none;
    
 }
@@ -162,7 +162,7 @@ body{
 
 .preview-ball{
     position: absolute;
-    opacity: 0;
+    overflow: visible;
     pointer-events: none;
     z-index: 20;
 }
@@ -176,7 +176,10 @@ body{
     position: absolute;
     top: 100%;
     left:50%;
-    transform: rotateX('-50%');
+    transform: translateX('-50%');
     height: 55px;
-    border-left: 3px dashed rgba(120, 140, 160, 0.8); ;
+    width: 0;
+    height: 36px;
+    z-index: 19;
+    border-left: 2px dashed rgba(120, 140, 160, 0.8); 
 }
