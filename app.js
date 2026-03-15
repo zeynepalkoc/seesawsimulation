@@ -55,7 +55,7 @@ objects.forEach(function(obj){
    ball.style.left = `${center + obj.distance - size / 2}px`;
 
 
-ball.style.top = `-${size * 6}px`;
+ball.style.top = `-${size * 0.25}px`;
 objectsContainer.appendChild(ball);
 
 });
