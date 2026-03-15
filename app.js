@@ -54,10 +54,10 @@ objects.forEach(function(obj){
     ball.style.height = `${size}px`;
    ball.style.left = `${center + obj.distance - size / 2}px`;
 
-const finalTop = -(size * 0.25);
+
 ball.style.top = `-${size * 6}px`;
 objectsContainer.appendChild(ball);
-animateDrop(ball, finalTop);
+
 });
  }
 function updatePreviewBall(positionX){
@@ -128,22 +128,13 @@ const distance = clickX - center;
 
 ball.style.left = `${center + distance - size / 2}px`;
 const finalTop = -(size * 0.25);
-ball.style.top = `-${size * 3}px`;
+ball.style.top = `-${size * 8}px`;
 
   objects.push({ weight: currentWeight, distance: distance });
    
    objectsContainer.appendChild(ball);
    animateDrop(ball,finalTop);
 
-
-
-   const angle = calculateAngle();
-  plank.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-   tiltAngle.textContent= `${angle.toFixed(1)}°`;
-  currentTilt=angle;
-  saveState();
-   updateWeightDisplay();
-   console.log("ball added");
 
    currentWeight=generateRandomWeight();
   updatenextWeightDisplay();
@@ -217,7 +208,7 @@ function animateDrop(ball, finalTop) {
 
     let currentTop = -(parseFloat(ball.style.height) * 3);
     let velocity = 0;
-    const gravity = 0.8;
+    const gravity = 0.08;
 
     function fall() {
 
@@ -227,7 +218,15 @@ function animateDrop(ball, finalTop) {
         if (currentTop >= finalTop) {
             currentTop = finalTop;
             ball.style.top = `${currentTop}px`;
-            return;
+         const angle = calculateAngle();
+    plank.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+    tiltAngle.textContent = `${angle.toFixed(1)}°`;
+    currentTilt = angle;
+
+    saveState();
+    updateWeightDisplay();
+
+    return;
         }
 
         ball.style.top = `${currentTop}px`;
