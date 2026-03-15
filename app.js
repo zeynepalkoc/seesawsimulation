@@ -10,6 +10,47 @@ const objectsContainer=document.getElementById("objects-container");
 const previewBall=document.getElementById("preview-ball");
 const previewText = document.getElementById("preview-text");
 
+function saveState()
+{
+    const data ={
+        objects: objects,
+        currentWeight: currentWeight
+    };
+
+    localStorage.setItem("seesawState", JSON.stringify(data));
+
+}
+
+function loadState()
+{
+    const saved = localStorage.getItem("seesawState");
+    if(!saved) return;
+
+    const parsed = JSON.parse(saved);
+
+    objects= parsed.objects || [];
+    currentWeight=parsed.currentWeight || generateRandomWeight();
+}
+function renderObjects()
+{
+    objectsContainer.innerHTML="";
+
+objects.forEach(function(obj){
+    const ball=document.createElement("div");
+    ball.className="object";
+    ball.textContent=`${obj.weight}kg`;
+
+    const size = 20 + obj.weight*5;
+    const center= plank.offsetWidth /2;
+
+     ball.style.width = `${size}px`;
+    ball.style.height = `${size}px`;
+    ball.style.left = `${center + obj.distance - size/2}px`;
+    ball.style.top = `-${size * 0.25}px`;
+
+    objectsContainer.appendChild(ball);
+});
+ }
 function updatePreviewBall(positionX){
    const size =20 + currentWeight * 5;
    
@@ -20,12 +61,16 @@ function updatePreviewBall(positionX){
 previewBall.style.top = `-${size * 1.30}px`;
 }
 
+
 function generateRandomWeight(){
     return Math.floor(Math.random()*10)+1;
 }
 
  let currentWeight= generateRandomWeight();
+ loadState();
+ renderObjects();
  updatenextWeightDisplay();
+ updateWeightDisplay();
 plank.addEventListener("click", handlePlankClick);
 resetButton.addEventListener("click", resetSimulation);
 
@@ -53,6 +98,8 @@ plank.addEventListener("mousemove", function(event){
     updatePreviewBall(mouseX);
 });
 console.log("click çalıştı");
+
+
 function handlePlankClick(event){
    const rect = plank.getBoundingClientRect();
 const clickX = event.clientX - rect.left;
@@ -88,6 +135,7 @@ updatePreviewBall(rect.width / 2);
   
    const torque = calculateTourqueDifference();
    console.log(torque);
+   saveState();
 
  }
 
@@ -163,8 +211,10 @@ rightWeight.textContent=`0 kg`;
 tiltAngle.textContent=`0.0°`;
 currentWeight=generateRandomWeight();
 updateWeightDisplay();
-
+localStorage.removeItem("seesawState");
 
 previewBall.style.opacity = "0";
 
   }
+
+
