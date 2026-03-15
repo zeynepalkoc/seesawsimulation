@@ -1,4 +1,5 @@
   let objects = [];
+  let currentTilt=0;
 
 const plank=document.getElementById("plank");
 const leftWeight=document.getElementById("leftweight");
@@ -9,12 +10,13 @@ const resetButton=document.getElementById("reset");
 const objectsContainer=document.getElementById("objects-container");
 const previewBall=document.getElementById("preview-ball");
 const previewText = document.getElementById("preview-text");
-const getInitialAngle = calculateAngle();
+
 function saveState()
 {
     const data ={
         objects: objects,
-        currentWeight: currentWeight
+        currentWeight: currentWeight,
+        tilt:currentTilt
     };
 
     localStorage.setItem("seesawState", JSON.stringify(data));
@@ -28,8 +30,13 @@ function loadState()
 
     const parsed = JSON.parse(saved);
 
-    objects= parsed.objects || [];
-    currentWeight=parsed.currentWeight || generateRandomWeight();
+    objects = parsed.objects || [];
+    currentWeight = parsed.currentWeight || generateRandomWeight();
+currentTilt=parsed.tilt || 0;
+
+    plank.style.transform = `translate(-50%, -50%) rotate(${currentTilt}deg)`;
+    tiltAngle.textContent = `${currentTilt.toFixed(1)}°`;
+   
 }
 function renderObjects()
 {
@@ -71,11 +78,16 @@ function generateRandomWeight(){
  renderObjects();
  updatenextWeightDisplay();
  updateWeightDisplay();
+ updatePreviewBall(plank.offsetWidth /2);
+
 plank.addEventListener("click", handlePlankClick);
 resetButton.addEventListener("click", resetSimulation);
 
 plank.addEventListener("mouseenter", function(){
     updatePreviewBall(plank.offsetWidth / 2);
+
+ 
+updatePreviewBall(plank.offsetWidth / 2);
     previewBall.style.opacity = "0.25";
 });
 
@@ -125,7 +137,8 @@ ball.style.top = `-${size * 0.25}px`;
    const angle = calculateAngle();
   plank.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
    tiltAngle.textContent= `${angle.toFixed(1)}°`;
-  
+  currentTilt=angle;
+  saveState();
    updateWeightDisplay();
    console.log("ball added");
 
@@ -200,6 +213,7 @@ function calculateTourqueDifference(){
   function resetSimulation()
   {
     objects=[];
+    currentTilt = 0;
 objectsContainer.innerHTML="";
 const logArea=document.getElementById("log-area");
 if(logArea){
@@ -209,8 +223,11 @@ plank.style.transform = `translate(-50%, -50%) rotate(0deg)`;
 leftWeight.textContent=`0 kg`;
 rightWeight.textContent=`0 kg`;
 tiltAngle.textContent=`0.0°`;
-currentWeight=generateRandomWeight();
+currentWeight = generateRandomWeight();
+
 updateWeightDisplay();
+updatenextWeightDisplay();
+updatePreviewBall(plank.offsetWidth / 2);
 localStorage.removeItem("seesawState");
 
 previewBall.style.opacity = "0";
