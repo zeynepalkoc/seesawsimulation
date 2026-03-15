@@ -95,6 +95,13 @@ body{
   transition: transform 0.4s ease;
 }
 
+#plank
+{
+    position: absolute;
+    width: 400px;
+    transition: transform 0.4s ease;
+}
+
 #objects-container {
   position: absolute;
   inset: 0;
@@ -182,4 +189,31 @@ body{
     height: 36px;
     z-index: 19;
     border-left: 2px dashed rgba(120, 140, 160, 0.8); 
+}
+
+@keyframes dropBall{
+    0%{
+        transform: translateY(-60px);
+        opacity: 0;
+    }
+
+    70%{
+        transform:translateY(5px);
+    }
+
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.object{
+    position: absolute;
+    border-radius: 50%;
+    background: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    animation: dropball 0.4s ease;
 }

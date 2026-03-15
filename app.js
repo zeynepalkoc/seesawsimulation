@@ -52,10 +52,12 @@ objects.forEach(function(obj){
 
      ball.style.width = `${size}px`;
     ball.style.height = `${size}px`;
-    ball.style.left = `${center + obj.distance - size/2}px`;
-    ball.style.top = `-${size * 0.25}px`;
+   ball.style.left = `${center + obj.distance - size / 2}px`;
 
-    objectsContainer.appendChild(ball);
+const finalTop = -(size * 0.25);
+ball.style.top = `-${size * 6}px`;
+objectsContainer.appendChild(ball);
+animateDrop(ball, finalTop);
 });
  }
 function updatePreviewBall(positionX){
@@ -85,9 +87,6 @@ resetButton.addEventListener("click", resetSimulation);
 
 plank.addEventListener("mouseenter", function(){
     updatePreviewBall(plank.offsetWidth / 2);
-
- 
-updatePreviewBall(plank.offsetWidth / 2);
     previewBall.style.opacity = "0.25";
 });
 
@@ -127,12 +126,16 @@ ball.style.height = `${size}px`;
 const center = rect.width / 2;
 const distance = clickX - center;
 
-ball.style.left = `${center + distance - size/2}px`;
-ball.style.top = `-${size * 0.25}px`;
+ball.style.left = `${center + distance - size / 2}px`;
+const finalTop = -(size * 0.25);
+ball.style.top = `-${size * 3}px`;
 
   objects.push({ weight: currentWeight, distance: distance });
    
    objectsContainer.appendChild(ball);
+   animateDrop(ball,finalTop);
+
+
 
    const angle = calculateAngle();
   plank.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
@@ -209,7 +212,31 @@ function calculateTourqueDifference(){
 
     return rightTourque - leftTourque;
   }
+  
+function animateDrop(ball, finalTop) {
 
+    let currentTop = -(parseFloat(ball.style.height) * 3);
+    let velocity = 0;
+    const gravity = 0.8;
+
+    function fall() {
+
+        velocity += gravity;
+        currentTop += velocity;
+
+        if (currentTop >= finalTop) {
+            currentTop = finalTop;
+            ball.style.top = `${currentTop}px`;
+            return;
+        }
+
+        ball.style.top = `${currentTop}px`;
+
+        requestAnimationFrame(fall);
+    }
+
+    requestAnimationFrame(fall);
+}
   function resetSimulation()
   {
     objects=[];
