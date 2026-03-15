@@ -113,10 +113,3 @@ body{
   align-items: center;
 }
 
-.ball{
-    width: 20px;
-    height: 20px;
-    background: black;
-    border-radius: 50%;
-    position: absolute;
-}

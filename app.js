@@ -40,14 +40,15 @@ function handlePlankClick(event){
    objectsContainer.appendChild(ball);
 
    const angle = calculateAngle();
-   plank.style.transform=`transtateY(-50%) rotate(${angle}deg)`;
+   plank.style.transform=`translateX(-50%) rotate(${angle}deg)`;
    tiltAngle.textContent= `${angle.toFixed(1)}°`;
   
    updateWeightDisplay();
    console.log("ball added");
    currentWeight=generateRandomWeight();
-  nextWeight.textContent = `${currentWeight} kg`;
-
+ 
+   const torque = calculateTourqueDifference();
+   console.log(torque);
 }
 
 function calculateAngle(){
@@ -82,7 +83,24 @@ return angle;
             rightWeightTotal += obj.weight;
         }
     });
-    leftWeight.textContent = ` ${leftWeightTotal} kg`;
-    rightWeight.textContent = ` ${rightWeightTotal} kg`;
+    leftWeight.textContent = `${leftWeightTotal} kg`;
+    rightWeight.textContent = `${rightWeightTotal} kg`;
 }
  
+function calculateTourqueDifference(){
+    let leftTourque=0;
+    let rightTourque=0;
+
+    objects.forEach(function(obj){ const distance= Math.abs(obj.distance);
+        if (obj.distance<0){
+        leftTourque += obj.weight * distance;
+        }
+        else{
+            rightTourque += obj.weight * distance;
+        } 
+    });
+       
+   
+
+    return rightTourque - leftTourque;
+  }
