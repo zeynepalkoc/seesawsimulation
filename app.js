@@ -13,4 +13,10 @@ let currentWeight= generateRandomWeight();
 
 nextWeight.textContent = `${currentWeight} kg`;
 
-console.log(currentWeight);
+Plank.addEventListener("click",handlePlankClick);
+
+function handlePlankClick(e){
+    console.log("plank clicked", e);
+}
+
+ 
