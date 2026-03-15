@@ -7,6 +7,18 @@ const nextWeight=document.getElementById("nextweight");
 const tiltAngle=document.getElementById("tiltangle");
 const resetButton=document.getElementById("reset");
 const objectsContainer=document.getElementById("objects-container");
+const previewBall=document.getElementById("preview-ball");
+
+function updatePreviewBall(positionX){
+   const size =20 + currentWeight * 5;
+   
+    previewBall.textContent = `${currentWeight} kg`;
+    previewBall.style.width = `${size}px`;
+    previewBall.style.height = `${size}px`;
+    previewBall.style.left = `${positionX - size / 2}px`;
+    previewBall.style.top = `${-(size / 2) + 14}px`;
+}
+
 function generateRandomWeight(){
     return Math.floor(Math.random()*10)+1;
 }
@@ -16,9 +28,26 @@ function generateRandomWeight(){
 
 
 plank.addEventListener("click", handlePlankClick);
+resetButton.addEventListener("click", resetSimulation);
+plank.addEventListener("mouseenter", function(){
+    previewBall.style.display="flex";
+
+});
+
+plank.addEventListener("mouseleave", function(){
+    previewBall.style.display="none";
+
+});
+
+plank.addEventListener("mousemove", function(event){
+    const rect= plank.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+
+    updatePreviewBall(mouseX);
+});
 
 function handlePlankClick(event){
-   const rect = plank.getBoundingClientRect();
+   const rect=plank.getBoundingClientRect();
    const clickX = event.clientX - rect.left;
   
    const ball=document.createElement("div");
@@ -40,7 +69,7 @@ function handlePlankClick(event){
    objectsContainer.appendChild(ball);
 
    const angle = calculateAngle();
-   plank.style.transform=`translateX(-50%) rotate(${angle}deg)`;
+  plank.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
    tiltAngle.textContent= `${angle.toFixed(1)}°`;
   
    updateWeightDisplay();
@@ -48,6 +77,8 @@ function handlePlankClick(event){
 
    currentWeight=generateRandomWeight();
   updatenextWeightDisplay();
+updatePreviewBall(rect.width / 2);
+  
    const torque = calculateTourqueDifference();
    console.log(torque);
 
@@ -106,8 +137,19 @@ function calculateTourqueDifference(){
         } 
     });
        
-   
+
 
     return rightTourque - leftTourque;
   }
 
+  function resetSimulation()
+  {
+    objects=[];
+objectsContainer.innerHTML="";
+plank.style.transform=`translateX(-%50) rotate(0deg)`;
+leftWeight.textContent=`0 kg`;
+rightWeight.textContent=`0 kg`;
+tiltAngle.textContent=`0.0°`;
+currentWeight=generateRandomWeight();
+updateWeightDisplay();
+  }

@@ -113,3 +113,11 @@ body{
   align-items: center;
 }
 
+.preview-ball
+{
+    display:none;
+    opacity: 0,05;
+    pointer-events:none;
+   
+}
+
