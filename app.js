@@ -1,4 +1,4 @@
-let objects = [];
+  let objects = [];
 
 const plank=document.getElementById("plank");
 const leftWeight=document.getElementById("leftweight");
@@ -9,7 +9,7 @@ const resetButton=document.getElementById("reset");
 const objectsContainer=document.getElementById("objects-container");
 const previewBall=document.getElementById("preview-ball");
 const previewText = document.getElementById("preview-text");
-
+const getInitialAngle = calculateAngle();
 function saveState()
 {
     const data ={
