@@ -78,7 +78,7 @@ body{
     height: 0;
     border-left: 30px solid transparent;
     border-right: 30px solid transparent;
-    border-bottom: 60px solid #7700ff;
+    border-bottom: 60px solid #745c46;
 
     
 }
@@ -88,7 +88,7 @@ body{
   position: absolute;
   width: 400px;
   height: 30px;
-  background: linear-gradient(90deg, #4b00ff, #5f16ff);
+  background: #473625;
   border-radius: 4px;
   left: 50%;
   top: 50%;
@@ -114,7 +114,8 @@ body{
 .object {
         position: absolute;
     border-radius: 50%;
-    background: orange;
+    color: white;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,7 +123,9 @@ body{
     animation: dropball 0.4s ease;
   
 }
-
+.object:hover{
+  transform:scale(1.05);
+}
 .preview-ball
 {
    
@@ -137,7 +140,7 @@ body{
     padding: 10px 18px;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    background: #4b00ff;
     color: white;
     font-size: 14px;
     font-weight: 600;
@@ -151,7 +154,7 @@ body{
 
 #reset:hover{
     transform: translateY(-1px);
-        background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+        background: #7700ff;
 }
 
 #reset:active{

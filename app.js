@@ -12,7 +12,23 @@ const objectsContainer=document.getElementById("objects-container");
 const previewBall=document.getElementById("preview-ball");
 const previewText = document.getElementById("preview-text");
 const logArea = document.getElementById("log-area");
+function getBallColor(weight){
 
+    const colors = {
+        1:"#6e91f9",
+        2:"#6fedd4",
+        3:"#6dbbfa",
+        4:"#f478a3",
+        5:"#fbd080",
+        6:"#f4957d",
+        7:"#7df2f0",
+        8:"#fc8686",
+        9:"#f7b881",
+        10:"#f67ce3"
+    };
+
+    return colors[weight] || "#888";
+}
 function addLog(message, save=true){
     if(!logArea)return;
 
@@ -79,7 +95,7 @@ function renderObjects()
 objects.forEach(function(obj){
     const ball=document.createElement("div");
     ball.className="object";
-    ball.textContent=`${obj.weight}kg`;
+    ball.textContent=`${obj.weight} kg`;
 
     const size = 20 + obj.weight*5;
     const center= plank.offsetWidth /2;
@@ -87,7 +103,7 @@ objects.forEach(function(obj){
      ball.style.width = `${size}px`;
     ball.style.height = `${size}px`;
    ball.style.left = `${center + obj.distance - size / 2}px`;
-
+ball.style.background=getBallColor(obj. weight);
 
 ball.style.top = `-${size * 0.25}px`;
 objectsContainer.appendChild(ball);
@@ -102,6 +118,7 @@ function updatePreviewBall(positionX){
     previewBall.style.height = `${size}px`;
     previewBall.style.left = `${positionX - size / 2}px`;
 previewBall.style.top = `-${size * 1.30}px`;
+previewBall.style.background = getBallColor(currentWeight);
 }
 
 
@@ -156,6 +173,7 @@ ball.textContent = `${currentWeight} kg`;
 const size = 20 + currentWeight * 5;
 ball.style.width = `${size}px`;
 ball.style.height = `${size}px`;
+ball.style.background=getBallColor(currentWeight);
 
 const center = rect.width / 2;
 const distance = clickX - center;
