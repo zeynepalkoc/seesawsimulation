@@ -4,7 +4,7 @@ const rightWeight=document.getElementById("rightweight");
 const nextWeight=document.getElementById("nextweight");
 const tiltAngle=document.getElementById("tiltangle");
 const resetButton=document.getElementById("reset");
-
+const objectsContainer=document.getElementById("objects-container");
 function generateRandomWeight(){
     return Math.floor(Math.random()*10)+1;
 }
@@ -18,11 +18,22 @@ plank.addEventListener("click", handlePlankClick);
 function handlePlankClick(event){
    const rect = plank.getBoundingClientRect();
    const clickX = event.clientX - rect.left;
-   const center = rect.width/2;
-   const distanceFromCenter = clickX - center;
+  
+   const ball=document.createElement("div");
+   ball.className="object";
+   ball.textContent = `${currentWeight} kg`;
 
-  console.log("clickX", clickX);
-  console.log("distance from center:", distanceFromCenter);
+   const size=20 + currentWeight*5;
+   ball.style.width = `${size}px`;
+   ball.style.height = `${size}px`;
+
+   ball.style.left = `${clickX - size/2}px`;
+   ball.style.top = `-50px`;
+   
+   objectsContainer.appendChild(ball);
+
+   console.log("ball added");
+
 }
 
  
