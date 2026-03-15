@@ -59,7 +59,7 @@ body{
 
 .simulate-area {
   position: relative;
-  height: 300px;
+  height: 450px;
   background: #fcfcfc;
   border:1px solid #ddd;
   border-radius: 10px;
@@ -84,7 +84,7 @@ body{
 .plank {
   position: absolute;
   width: 400px;
-  height: 12px;
+  height: 30px;
   background: linear-gradient(90deg, #4b00ff, #5f16ff);
   border-radius: 4px;
   left: 50%;
@@ -148,4 +148,35 @@ body{
     transform: scale(0.98);
 }
 
+.simulate-area{
+    position: relative;
+}
 
+.preview-ball{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    z-index:20;
+
+}
+
+.preview-ball{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 20;
+}
+
+#preview-text{
+    position: relative;
+    z-index: 2;
+}
+
+.preview-line{
+    position: absolute;
+    top: 100%;
+    left:50%;
+    transform: rotateX('-50%');
+    height: 55px;
+    border-left: 3px dashed rgba(120, 140, 160, 0.8); ;
+}

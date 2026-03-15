@@ -6,6 +6,7 @@ const rightWeight=document.getElementById("rightweight");
 const nextWeight=document.getElementById("nextweight");
 const tiltAngle=document.getElementById("tiltangle");
 const resetButton=document.getElementById("reset");
+const simulationArea = document.getElementById("simulate-area");
 const objectsContainer=document.getElementById("objects-container");
 const previewBall=document.getElementById("preview-ball");
 
@@ -16,7 +17,7 @@ function updatePreviewBall(positionX){
     previewBall.style.width = `${size}px`;
     previewBall.style.height = `${size}px`;
     previewBall.style.left = `${positionX - size / 2}px`;
-    previewBall.style.top = `${-(size / 2) + 14}px`;
+    previewBall.style.top = `185px`;
 }
 
 function generateRandomWeight(){
@@ -53,7 +54,7 @@ plank.addEventListener("mousemove", function(event){
 });
 console.log("click çalıştı");
 function handlePlankClick(event){
-   const rect=plank.getBoundingClientRect();
+   const rect=simulationArea.getBoundingClientRect();
    const clickX = event.clientX - rect.left;
   
    const ball=document.createElement("div");
