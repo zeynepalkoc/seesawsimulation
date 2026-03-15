@@ -10,6 +10,19 @@ const resetButton=document.getElementById("reset");
 const objectsContainer=document.getElementById("objects-container");
 const previewBall=document.getElementById("preview-ball");
 const previewText = document.getElementById("preview-text");
+const logArea = document.getElementById("log-area");
+
+function addLog(message){
+    if(!logArea)return;
+
+    const logItem=document.createElement("div");
+    logItem.className="log-item";
+    logItem.textContent=message;
+
+    logArea.prepend(logItem);
+}
+
+
 
 function saveState()
 {
@@ -126,6 +139,11 @@ ball.style.height = `${size}px`;
 const center = rect.width / 2;
 const distance = clickX - center;
 
+const side = distance < 0 ? "left" : "right";
+const distanceText = Math.abs(Math.round(distance));
+
+addLog(`${currentWeight}kg dropped on ${side} side at ${distanceText}px from center`);
+
 ball.style.left = `${center + distance - size / 2}px`;
 const finalTop = -(size * 0.25);
 ball.style.top = `-${size * 8}px`;
@@ -241,7 +259,7 @@ function animateDrop(ball, finalTop) {
     objects=[];
     currentTilt = 0;
 objectsContainer.innerHTML="";
-const logArea=document.getElementById("log-area");
+
 if(logArea){
     logArea.innerHTML = "";
 }
