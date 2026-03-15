@@ -13,10 +13,16 @@ let currentWeight= generateRandomWeight();
 
 nextWeight.textContent = `${currentWeight} kg`;
 
-Plank.addEventListener("click",handlePlankClick);
+plank.addEventListener("click", handlePlankClick);
 
-function handlePlankClick(e){
-    console.log("plank clicked", e);
+function handlePlankClick(event){
+   const rect = plank.getBoundingClientRect();
+   const clickX = event.clientX - rect.left;
+   const center = rect.width/2;
+   const distanceFromCenter = clickX - center;
+
+  console.log("clickX", clickX);
+  console.log("distance from center:", distanceFromCenter);
 }
 
  
