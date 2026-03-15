@@ -11,8 +11,8 @@ function generateRandomWeight(){
     return Math.floor(Math.random()*10)+1;
 }
 
-let currentWeight= generateRandomWeight();
-
+ let currentWeight= generateRandomWeight();
+ updatenextWeightDisplay();
 
 
 plank.addEventListener("click", handlePlankClick);
@@ -45,11 +45,13 @@ function handlePlankClick(event){
   
    updateWeightDisplay();
    console.log("ball added");
+
    currentWeight=generateRandomWeight();
- 
+  updatenextWeightDisplay();
    const torque = calculateTourqueDifference();
    console.log(torque);
-}
+
+ }
 
 function calculateAngle(){
     let leftTorque=0;
@@ -70,7 +72,8 @@ if(angle<-30) angle=-30;
 return angle;
 }
 
- function updateWeightDisplay(){
+ 
+function updateWeightDisplay(){
     let leftWeightTotal=0;
     let rightWeightTotal=0;
 
@@ -87,6 +90,9 @@ return angle;
     rightWeight.textContent = `${rightWeightTotal} kg`;
 }
  
+function updatenextWeightDisplay(){
+    nextWeight.textContent = `${currentWeight} kg`;
+}
 function calculateTourqueDifference(){
     let leftTourque=0;
     let rightTourque=0;
@@ -104,3 +110,4 @@ function calculateTourqueDifference(){
 
     return rightTourque - leftTourque;
   }
+
