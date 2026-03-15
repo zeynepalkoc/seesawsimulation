@@ -5,7 +5,7 @@ box-sizing: border-box;
 body{
     margin: 0;
     padding: 40px 20px;
-    font-family: 'arial', sans-serif;
+    font-family: arial, sans-serif;
     background: #efefefdf;
     display: flex;
     justify-content: center;
@@ -95,15 +95,10 @@ body{
   transform: translate(-50%, -50%);
   z-index: 3;
   transform-origin: center center;
-  transition: transform 0.4s ease;
-}
-
-#plank
-{
-    position: absolute;
-    width: 400px;
     transition: transform 1.1s ease;
 }
+
+
 
 #objects-container {
   position: absolute;
@@ -126,13 +121,7 @@ body{
 .object:hover{
   transform:scale(1.05);
 }
-.preview-ball
-{
-   
-    opacity: 0.05;
-    pointer-events:none;
-   
-}
+
 
 
 #reset{
@@ -161,24 +150,15 @@ body{
     transform: scale(0.98);
 }
 
-.simulate-area{
-    position: relative;
-}
 
 .preview-ball{
     position: absolute;
-    opacity: 0;
     pointer-events: none;
-    z-index:20;
-
-}
-
-.preview-ball{
-    position: absolute;
+    z-index:20; 
+    opacity: 0.05;
     overflow: visible;
-    pointer-events: none;
-    z-index: 20;
 }
+
 
 #preview-text{
     position: relative;
@@ -189,15 +169,14 @@ body{
     position: absolute;
     top: 100%;
     left:50%;
-    transform: translateX('-50%');
-    height: 55px;
+    transform: translateX(-50%);
     width: 0;
     height: 36px;
     z-index: 19;
     border-left: 2px dashed rgba(120, 140, 160, 0.8); 
 }
 
-@keyframes dropBall{
+@keyframes dropball{
     0%{
         transform: translateY(-60px);
         opacity: 0;
@@ -269,21 +248,21 @@ body{
         height: 420px;
     }
 
-    #plank{
+    .plank{
         width: 320px;
     }
 
     #reset{
         width: 100%;
     }
-
+}
     @media (max-width: 500px){
 
   .stat-panel{
     grid-template-columns:1fr;
   }
 
-  #plank{
+  .plank{
     width:260px;
   }
 
@@ -295,5 +274,5 @@ body{
     max-height:120px;
   }
 
-}
+
 }
