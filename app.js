@@ -1,5 +1,6 @@
   let objects = [];
   let currentTilt=0;
+  let logs =[]
 
 const plank=document.getElementById("plank");
 const leftWeight=document.getElementById("leftweight");
@@ -12,7 +13,7 @@ const previewBall=document.getElementById("preview-ball");
 const previewText = document.getElementById("preview-text");
 const logArea = document.getElementById("log-area");
 
-function addLog(message){
+function addLog(message, save=true){
     if(!logArea)return;
 
     const logItem=document.createElement("div");
@@ -20,6 +21,11 @@ function addLog(message){
     logItem.textContent=message;
 
     logArea.prepend(logItem);
+
+    if(save){
+        logs.unshift(message);
+        saveState();
+    }
 }
 
 
@@ -29,7 +35,8 @@ function saveState()
     const data ={
         objects: objects,
         currentWeight: currentWeight,
-        tilt:currentTilt
+        tilt:currentTilt,
+        logs: logs
     };
 
     localStorage.setItem("seesawState", JSON.stringify(data));
@@ -49,7 +56,21 @@ currentTilt=parsed.tilt || 0;
 
     plank.style.transform = `translate(-50%, -50%) rotate(${currentTilt}deg)`;
     tiltAngle.textContent = `${currentTilt.toFixed(1)}°`;
-   
+   logs= parsed.logs || [];
+logs.forEach(function(log){
+    addLog(log, false);
+
+    if(logArea){
+        logArea.innerHTML="";
+    }
+    logs.slice().reverse().forEach(function(log)
+    {
+        addLog(log,false);
+
+    });
+});
+
+
 }
 function renderObjects()
 {
@@ -256,9 +277,12 @@ function animateDrop(ball, finalTop) {
 }
   function resetSimulation()
   {
+    
     objects=[];
+    logs=[];
     currentTilt = 0;
 objectsContainer.innerHTML="";
+
 
 if(logArea){
     logArea.innerHTML = "";
