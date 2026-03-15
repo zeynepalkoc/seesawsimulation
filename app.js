@@ -163,7 +163,8 @@ const distance = clickX - center;
 const side = distance < 0 ? "left" : "right";
 const distanceText = Math.abs(Math.round(distance));
 
-addLog(`${currentWeight}kg dropped on ${side} side at ${distanceText}px from center`);
+const arrow =side === "left"? "⬅️" : "➡️";
+addLog(`${arrow} ${currentWeight}kg dropped on ${side} side (${distanceText}px)`);
 
 ball.style.left = `${center + distance - size / 2}px`;
 const finalTop = -(size * 0.25);
