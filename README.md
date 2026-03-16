@@ -122,7 +122,7 @@ No external libraries or frameworks were used.
 ---
 
 ## Project Structure
-'''seesaw-simulation
+```seesaw-simulation
 │
 ├── assets
 │ └── seesaw.png
@@ -130,8 +130,8 @@ No external libraries or frameworks were used.
 ├── index.html
 ├── styles.css
 ├── app.js
-└── README.md'''
-
+└── README.md
+```
 ---
 
 ## AI Assistance
