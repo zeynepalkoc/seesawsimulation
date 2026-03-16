@@ -73,9 +73,6 @@ currentTilt=parsed.tilt || 0;
     plank.style.transform = `translate(-50%, -50%) rotate(${currentTilt}deg)`;
     tiltAngle.textContent = `${currentTilt.toFixed(1)}°`;
    logs= parsed.logs || [];
-logs.forEach(function(log){
-    addLog(log, false);
-
     if(logArea){
         logArea.innerHTML="";
     }
@@ -84,10 +81,10 @@ logs.forEach(function(log){
         addLog(log,false);
 
     });
-});
+ }
 
 
-}
+
 function renderObjects()
 {
     objectsContainer.innerHTML="";
@@ -159,7 +156,7 @@ plank.addEventListener("mousemove", function(event){
 
     updatePreviewBall(mouseX);
 });
-console.log("click çalıştı");
+
 
 
 function handlePlankClick(event){
@@ -198,8 +195,7 @@ ball.style.top = `-${size * 8}px`;
   updatenextWeightDisplay();
 updatePreviewBall(rect.width / 2);
   
-   const torque = calculateTourqueDifference();
-   console.log(torque);
+   const torque = calculateTorqueDifference();
    saveState();
 
  }
@@ -244,7 +240,7 @@ function updateWeightDisplay(){
 function updatenextWeightDisplay(){
     nextWeight.textContent = `${currentWeight} kg`;
 }
-function calculateTourqueDifference(){
+function calculateTorqueDifference(){
     let leftTourque=0;
     let rightTourque=0;
 
