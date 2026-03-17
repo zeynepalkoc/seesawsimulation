@@ -5,6 +5,7 @@ This project is an interactive seesaw simulation built using pure JavaScript, HT
 Users can click directly on the plank to drop objects with random weights. Each object influences the balance of the seesaw depending on its weight and its distance from the pivot point.
 The system recalculates the balance dynamically and rotates the plank accordingly.
 
+![Seesaw Simulation](assets/seesaw.png)
 ---
 
 ## Live Demo
